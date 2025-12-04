@@ -8,10 +8,19 @@ class Appointment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
-    dr = models.CharField(max_length=20)
+    doctor = models.CharField(max_length=20)
     clinic = models.CharField(max_length=30)
     description = models.TextField(max_length=100)
 
     def __str__(self):
-        return self.title
+        details =  (f"Appointment details:\n"
+                    f"Doctor: {self.doctor}\n"
+                    f"Location: {self.clinic}\n"
+                    f"Date: {self.date.strftime('%m/%d/%Y')}")
+        
+        # return description if there is one
+        if self.description:
+                    details +=f"\nTime: {self.time.strftime('%I:%M %p')}"
+
+        return details
     
