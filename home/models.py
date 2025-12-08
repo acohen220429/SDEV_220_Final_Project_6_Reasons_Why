@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Appointment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True,blank=True)
     date = models.DateField()
     time = models.TimeField()
     doctor = models.CharField(max_length=20)

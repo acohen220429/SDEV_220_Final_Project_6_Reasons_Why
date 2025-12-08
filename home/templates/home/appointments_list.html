@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments</title>
+</head>
+
+<body>
+    <h1>Appointments</h1>
+    <ul>
+        {% for appointment in appointments %}
+        <li><a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment }}</a></li>
+        {% empty %}
+        <li>No appointments scheduled.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'appointment_create' %}">Add a new appointment</a></p>
+</body>
+
+</html>
