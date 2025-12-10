@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import index, appointments_list, appointment_detail, appointment_create
+from home.views import index, appointments_list, appointment_detail, appointment_create, resources_map
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path("appointments/", appointments_list, name="appointments_list"),
     path("appointments/<int:pk>/", appointment_detail, name="appointment_detail"),
     path("appointments/new/", appointment_create, name="appointment_create"),
+
+    path("map/", resources_map, name="resources_map"),
 ]
