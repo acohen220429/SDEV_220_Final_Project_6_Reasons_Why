@@ -1,0 +1,14 @@
+{% extends 'home/index.html' %}
+{% block content %}
+<main class="container">
+    {% if user.is_authenticated %}
+    <h1>New Appointment</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include './icons/list-task.svg' %}</a></p>
+    {% endif %}
+</main>
+{% endblock %}

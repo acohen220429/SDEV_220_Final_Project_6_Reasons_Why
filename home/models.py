@@ -16,11 +16,12 @@ class Appointment(models.Model):
         details =  (f"Appointment details:\n"
                     f"Doctor: {self.doctor}\n"
                     f"Location: {self.clinic}\n"
-                    f"Date: {self.date.strftime('%m/%d/%Y')}")
+                    f"Date: {self.date.strftime('%m/%d/%Y')}\n"
+                    f"Time: {self.time.strftime('%I:%M %p')}\n")
         
         # return description if there is one
         if self.description:
-                    details +=f"\nTime: {self.time.strftime('%I:%M %p')}"
+                    details +=f"Description: {self.description}\n"
 
         return details
     
