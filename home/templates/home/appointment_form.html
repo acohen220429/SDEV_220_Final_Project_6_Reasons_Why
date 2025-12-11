@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments</title>
-</head>
-
-<body>
+{% extends 'home/index.html' %}
+{% block content %}
+<main class="container">
+    {% if user.is_authenticated %}
     <h1>New Appointment</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
-    <p><a href="{% url 'appointments_list' %}">Back to Appointments List</a></p>
-</body>
-
-</html>
+    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include './icons/list-task.svg' %}</a></p>
+    {% endif %}
+</main>
+{% endblock %}

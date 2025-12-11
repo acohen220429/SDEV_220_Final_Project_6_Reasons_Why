@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments</title>
-</head>
-
-<body>
+{% extends 'home/index.html' %}
+{% block content %}
+<main class="container">
+    {% if user.is_authenticated %}
+    <aside class="action">
+        <a class="button" href="{% url 'appointment_edit' appointment.pk %}">Edit
+            {% include './icons/pencil.svg' %}
+        </a>
+        <form method="POST" action="{% url 'appointment_delete' appointment.pk %}">
+            {% csrf_token %}
+            <button type="submit" name="delete">Delete</button>{% include './icons/trash.svg' %}
+        </form>
+    </aside>
     <h1>Appointment Details</h1>
-    <p>{{ appointment }}</p>
-    <p><a href="{% url 'appointments_list' %}">Back to Appointments List</a></p>
-</body>
-
-</html>
+    <p>{{ appointment|linebreaksbr }}</p>
+    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include './icons/list-task.svg' %}</a></p>
+    {% endif %}
+</main>
+{% endblock %}

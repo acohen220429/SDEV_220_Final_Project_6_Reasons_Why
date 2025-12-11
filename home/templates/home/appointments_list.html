@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments</title>
-</head>
-
-<body>
+{% extends 'home/index.html' %}
+{% block content %}
+<main class="container">
+    {% if user.is_authenticated %}
     <h1>Appointments</h1>
     <ul>
         {% for appointment in appointments %}
-        <li><a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment }}</a></li>
+        <li><a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment|linebreaksbr }}</a></li>
         {% empty %}
         <li>No appointments scheduled.</li>
         {% endfor %}
     </ul>
-    <p><a href="{% url 'appointment_create' %}">Add a new appointment</a></p>
-</body>
-
-</html>
+    <p><a href="{% url 'appointment_create' %}">Add a new appointment {% include './icons/plus-circle.svg' %}</a></p>
+    {% endif %}
+</main>
+{% endblock %}
