@@ -16,18 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-<<<<<<< Updated upstream
-from home.views import index
-=======
 from home.views import index, appointments_list, appointment_detail, appointment_create, appointment_edit, appointment_delete, resources_map
->>>>>>> Stashed changes
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index, name="index"),
-<<<<<<< Updated upstream
-=======
-    
     path("appointments/", appointments_list, name="appointments_list"),
     path("appointments/<int:pk>/", appointment_detail, name="appointment_detail"),
     path("appointments/new/", appointment_create, name="appointment_create"),
@@ -35,5 +28,4 @@ urlpatterns = [
     path("appointments/<int:pk>/delete/", appointment_delete, name="appointment_delete"),
 
     path("map/", resources_map, name="resources_map"),
->>>>>>> Stashed changes
 ]

@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-from django.shortcuts import render
-
-def index(request):
-    return render(request, "home/index.html")
-=======
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AppointmentForm
 from .models import Appointment, Resource
@@ -85,4 +79,3 @@ def resources_map(request):
         'resources_json': mark_safe(json.dumps(resources_data))
     }
     return render(request, "home/resources_map.html", context)
->>>>>>> Stashed changes

@@ -31,15 +31,12 @@
             <p class="intro-text">
                 Future features will include a resource map, appointment tracking, and an email reminder system.
             </p>
-<<<<<<< Updated upstream
-=======
 
             <p><a class="button" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include './icons/geo-alt.svg' %}</a></p>
             {% if user.is_authenticated %}
             <p><a class="button" href="{% url 'appointments_list' %}">View appointments {% include './icons/list-task.svg' %}</a></p>
             {% endif %}
             
->>>>>>> Stashed changes
         </section>
 
     </main>

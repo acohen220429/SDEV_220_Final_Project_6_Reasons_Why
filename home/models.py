@@ -5,7 +5,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Appointment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True,blank=True)
     date = models.DateField()
     time = models.TimeField()
     doctor = models.CharField(max_length=20)
@@ -24,4 +24,14 @@ class Appointment(models.Model):
                     details +=f"Description: {self.description}\n"
 
         return details
+    
+class Resource(models.Model):
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
+    phone = models.CharField(max_length=30, blank=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.name
     
