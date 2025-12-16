@@ -4,6 +4,8 @@ from .models import Appointment, Resource
 import json
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 def index(request):
     return render(request, "home/index.html")
@@ -11,8 +13,21 @@ def index(request):
 @login_required
 def appointments_list(request):
     appointments = Appointment.objects.all().order_by('date', 'time')
+    now = timezone.now()
+    reminders_12hours = []
+    reminders_24hours = []
+    for appointment in appointments:
+        appointment_datetime = timezone.make_aware(datetime.combine(appointment.date, appointment.time))
+        
+        time_until = appointment_datetime - now
+        if timedelta(hours=0) < time_until <= timedelta(hours=12):
+            reminders_12hours.append(appointment)
+        elif timedelta(hours=12) < time_until <= timedelta(hours=24):
+            reminders_24hours.append(appointment)
     context = {
-        "appointments": appointments
+        "appointments": appointments,
+        "reminders_12hours": reminders_12hours,
+        "reminders_24hours": reminders_24hours,
     }
     return render(request, "home/appointments_list.html", context)
 
