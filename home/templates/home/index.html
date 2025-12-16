@@ -33,10 +33,17 @@
             </p>
 
             <p><a class="button" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include './icons/geo-alt.svg' %}</a></p>
+            
             {% if user.is_authenticated %}
             <p><a class="button" href="{% url 'appointments_list' %}">View appointments {% include './icons/list-task.svg' %}</a></p>
+
+            <p><a class="button" href="/logout" class="top-menu" style="background: none; border: none;">Logout {% include './icons/person-fill-dash.svg' %}</a></p>
             {% endif %}
-            
+
+            {% if not user.is_authenticated %}
+            <p><a class="button" href="{% url 'login' %}">Login {% include './icons/person-fill-check.svg' %}</a></p>
+            {% endif %}
+
         </section>
 
     </main>

@@ -1,0 +1,14 @@
+{% extends 'home/index.html' %}
+{% block content %}
+<main class="container">
+
+    <h2>Create Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <button type="submit" class="button">Create Account</button>
+    </form>
+
+</main>
+{% endblock %}
