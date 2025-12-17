@@ -4,16 +4,17 @@
     {% if user.is_authenticated %}
     <aside class="action">
         <a class="button" href="{% url 'appointment_edit' appointment.pk %}">Edit
-            {% include './icons/pencil.svg' %}
+            {% include 'home/icons/pencil.svg' %}
         </a>
         <form method="POST" action="{% url 'appointment_delete' appointment.pk %}">
             {% csrf_token %}
-            <button type="submit" name="delete">Delete</button>{% include './icons/trash.svg' %}
+            <button type="submit" name="delete">Delete</button>{% include 'home/icons/trash.svg' %}
         </form>
     </aside>
     <h1>Appointment Details</h1>
     <p>{{ appointment|linebreaksbr }}</p>
-    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include './icons/list-task.svg' %}</a></p>
+    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include 'home/icons/list-task.svg' %}</a>
+    </p>
     {% endif %}
 </main>
 {% endblock %}

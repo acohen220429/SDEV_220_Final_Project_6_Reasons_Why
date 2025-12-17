@@ -82,6 +82,25 @@ body {
     margin-bottom: 1.75rem;
 }
 
+/* Appointments page spacing tweaks */
+.container.appointments h1 {
+    margin-bottom: 1.5rem;
+}
+
+.container.appointments ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.1rem;
+}
+
+.container.appointments .action-links {
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.container.appointments li {
+    margin-bottom: 0.5rem;
+}
+
 .intro-title {
     font-size: 1.4rem;
     margin-bottom: 0.75rem;
@@ -145,7 +164,8 @@ code {
     color: #111827;
 }
 
-/* Responsive tweak */
+/* Icon sizing handled per-SVG to avoid global overrides that affect map/leaflet SVGs */
+
 @media (max-width: 640px) {
     .container {
         padding: 1.5rem;

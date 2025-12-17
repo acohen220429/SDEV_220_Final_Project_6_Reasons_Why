@@ -23,25 +23,30 @@
         </header>
 
         <section class="intro">
-            <h2 class="intro-title">Welcome to the project index page</h2>
+            <h2 class="intro-title">Welcome to 6 Reasons Why</h2>
             <p class="intro-text">
-                This page is the starting point for our 6 Reasons Why mental health web application.
-                It confirms that the Django server, templates, and static files are set up correctly.
+                This website is dedicated to your mental health journey in Indianapolis. We provide a platform for you
+                to find mental health resources, track your appointments, and stay informed about your mental health
+                journey.
             </p>
             <p class="intro-text">
-                Future features will include a resource map, appointment tracking, and an email reminder system.
+                Follow one of the links below to get started on your mental health journey.
             </p>
 
-            <p><a class="button" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include './icons/geo-alt.svg' %}</a></p>
-            
+                <!-- keep the include on a single line to avoid Django treating it as text -->
+                <p><a class="button" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include 'home/icons/geo-alt.svg' %}</a></p>
+
             {% if user.is_authenticated %}
-            <p><a class="button" href="{% url 'appointments_list' %}">View appointments {% include './icons/list-task.svg' %}</a></p>
+                <!-- keep the include on a single line to avoid Django treating it as text -->
+                <p><a class="button" href="{% url 'appointments_list' %}">View appointments {% include 'home/icons/list-task.svg' %}</a></p>
 
-            <p><a class="button" href="/logout" class="top-menu" style="background: none; border: none;">Logout {% include './icons/person-fill-dash.svg' %}</a></p>
+                <!-- keep the include on a single line to avoid Django treating it as text -->
+                <p><a class="button" href="/logout" class="top-menu" style="background: none; border: none;">Logout {% include 'home/icons/person-fill-dash.svg' %}</a></p>
             {% endif %}
 
             {% if not user.is_authenticated %}
-            <p><a class="button" href="{% url 'login' %}">Login {% include './icons/person-fill-check.svg' %}</a></p>
+            <!-- keep the include on a single line to avoid Django treating it as text -->
+            <p><a class="button" href="{% url 'login' %}">Login {% include 'home/icons/person-fill-check.svg' %}</a></p>
             {% endif %}
 
         </section>

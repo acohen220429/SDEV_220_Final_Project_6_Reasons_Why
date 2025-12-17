@@ -1,43 +1,46 @@
 {% extends 'home/index.html' %}
 {% block content %}
-<main class="container">
+<main class="container appointments">
     {% if user.is_authenticated %}
-    <h1>Appointments</h1>
+    <h1 style="margin-bottom:1.5rem;">Appointments</h1>
     {% if reminders_12hours %}
-    <div style ="background-color:#f8d7da; padding:12px; margin-bottom:15px; border-radius:6px;">
+    <div style="background-color:#f8d7da; padding:12px; margin-bottom:15px; border-radius:6px;">
         <strong> Appointments within the next 12 hours:</strong>
         <ul>
             {% for appointment in reminders_12hours %}
             <li>
                 {{ appointment.doctor }} -
-             {{ appointment.date }} at {{ appointment.time }}
+                {{ appointment.date }} at {{ appointment.time }}
             </li>
             {% endfor %}
         </ul>
-</div>
-{% endif %}
-{% if reminders_24hours %}
-    <div style ="background-color:#fff3cd; padding:12px; margin-bottom:15px; border-radius:6px;">
+    </div>
+    {% endif %}
+    {% if reminders_24hours %}
+    <div style="background-color:#fff3cd; padding:12px; margin-bottom:15px; border-radius:6px;">
         <strong> Appointments within the next 24 hours:</strong>
         <ul>
             {% for appointment in reminders_24hours %}
             <li>
                 {{ appointment.doctor }} -
-             {{ appointment.date }} at {{ appointment.time }}
+                {{ appointment.date }} at {{ appointment.time }}
             </li>
             {% endfor %}
         </ul>
     </div>
-{% endif %}
-<ul>
+    {% endif %}
+    <ul style="margin-bottom:1.5rem; padding-left:1.1rem;">
         {% for appointment in appointments %}
-        <li>
-            <a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment|linebreaksbr }}</a></li>
+        <li style="margin-bottom:0.5rem;">
+            <a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment|linebreaksbr }}</a>
+        </li>
         {% empty %}
-        <li>No appointments scheduled.</li>
+        <li style="margin-bottom:0.5rem;">No appointments scheduled.</li>
         {% endfor %}
     </ul>
-    <p><a href="{% url 'appointment_create' %}">Add a new appointment {% include './icons/plus-circle.svg' %}</a></p>
+    <p class="action-links" style="margin-top:1rem; margin-bottom:0.4rem;"><a href="{% url 'appointment_create' %}">Add
+            a new appointment {% include 'home/icons/plus-circle.svg' %}</a></p>
+    <p class="action-links" style="margin-bottom:0.8rem;"><a href="/">Back to index</a></p>
     {% endif %}
 </main>
 {% endblock %}

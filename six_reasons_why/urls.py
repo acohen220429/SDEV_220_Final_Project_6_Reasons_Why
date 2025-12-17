@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import index, appointments_list, appointment_detail, appointment_create, appointment_edit, appointment_delete, resources_map, logout_view, SignUpView
+from home.views import index, appointments_list, appointment_detail, appointment_create, appointment_edit, appointment_delete, resources_map, logout_view, SignUpView, CustomLoginView
 from django.contrib.auth import views
 
 urlpatterns = [
@@ -27,7 +27,8 @@ urlpatterns = [
     path("appointments/new/", appointment_create, name="appointment_create"),
     path("appointments/<int:pk>/edit/", appointment_edit, name="appointment_edit"),
     path("appointments/<int:pk>/delete/", appointment_delete, name="appointment_delete"),
-    path("accounts/login/", views.LoginView.as_view(), name="login"),
+    # use custom login that always redirects to index
+    path("accounts/login/", CustomLoginView.as_view(), name="login"),
     path("map/", resources_map, name="resources_map"),
     path("logout/", logout_view, name="logout"),
     path("signup/", SignUpView.as_view(), name="signup"),

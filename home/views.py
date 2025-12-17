@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.views import LoginView
+from django.urls import reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -16,7 +18,7 @@ def index(request):
 
 @login_required
 def appointments_list(request):
-    appointments = Appointment.objects.all().order_by('date', 'time')
+    appointments = Appointment.objects.filter(author=request.user).order_by('date', 'time')
     now = timezone.now()
     reminders_12hours = []
     reminders_24hours = []
@@ -37,7 +39,7 @@ def appointments_list(request):
 
 @login_required
 def appointment_detail(request, pk):
-    appointment = Appointment.objects.get(pk=pk)
+    appointment = get_object_or_404(Appointment, pk=pk, author=request.user)
     context = {
         "appointment": appointment
     }
@@ -48,7 +50,9 @@ def appointment_create(request):
     if request.method == "POST":
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            appointment = form.save()
+            appointment = form.save(commit=False)
+            appointment.author = request.user
+            appointment.save()
             return redirect('appointment_detail', pk=appointment.pk)
     else:
         form = AppointmentForm()
@@ -60,7 +64,7 @@ def appointment_create(request):
 
 @login_required
 def appointment_edit(request, pk):
-    appointment = get_object_or_404(Appointment, pk=pk)
+    appointment = get_object_or_404(Appointment, pk=pk, author=request.user)
     if request.method == "POST":
         form = AppointmentForm(request.POST, instance=appointment)
         if form.is_valid():
@@ -76,7 +80,7 @@ def appointment_edit(request, pk):
 
 @login_required
 def appointment_delete(request, pk):
-    appointment = get_object_or_404(Appointment, pk=pk)
+    appointment = get_object_or_404(Appointment, pk=pk, author=request.user)
     if request.method == "POST":
         appointment.delete()
     return redirect("appointments_list")
@@ -107,3 +111,8 @@ class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "registration/signup.html"
+
+
+class CustomLoginView(LoginView):
+    def get_success_url(self):
+        return reverse('index')
