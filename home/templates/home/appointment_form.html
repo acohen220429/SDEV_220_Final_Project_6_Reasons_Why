@@ -8,7 +8,8 @@
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
-    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include './icons/list-task.svg' %}</a></p>
+    <p><a href="{% url 'appointments_list' %}">Back to Appointments List {% include 'home/icons/list-task.svg' %}</a>
+    </p>
     {% endif %}
 </main>
 {% endblock %}
