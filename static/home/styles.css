@@ -444,6 +444,7 @@ label {
 
 /* input width reduced so fields don’t feel too wide */
 input[type="text"],
+input[type="password"],
 input[type="date"],
 input[type="time"],
 input[type="email"],
