@@ -2,57 +2,75 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <title>6 Reasons Why - Mental Health Support</title>
     <link rel="stylesheet" href="{% static 'home/styles.css' %}">
 </head>
 
+
 <body>
     {% block content %}
-    <main class="container">
-        <header class="header">
-            <div class="header-left">
-                <div class="logo-circle">6</div>
-                <div class="title-block">
-                    <h1 class="site-title">6 Reasons Why</h1>
-                    <p class="site-subtitle">Mental health support portal</p>
+
+
+    <!-- NEW: page wrapper (lets us style spacing & layout consistently) -->
+    <div class="page-shell">
+        <main class="container">
+            <header class="header">
+                <div class="header-left">
+                    <div class="logo-circle">6</div>
+                    <div class="title-block">
+                        <h1 class="site-title">6 Reasons Why</h1>
+                        <p class="site-subtitle">Mental health support portal</p>
+                    </div>
                 </div>
-            </div>
-            <span class="badge">SDEV 220 Django project</span>
-        </header>
+                <span class="badge">SDEV 220 Django project</span>
+            </header>
 
-        <section class="intro">
-            <h2 class="intro-title">Welcome to 6 Reasons Why</h2>
-            <p class="intro-text">
-                This website is dedicated to your mental health journey in Indianapolis. We provide a platform for you
-                to find mental health resources, track your appointments, and stay informed about your mental health
-                journey.
-            </p>
-            <p class="intro-text">
-                Follow one of the links below to get started on your mental health journey.
-            </p>
 
-                <!-- keep the include on a single line to avoid Django treating it as text -->
-                <p><a class="button" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include 'home/icons/geo-alt.svg' %}</a></p>
+            <section class="intro">
+                <h2 class="intro-title">Welcome to 6 Reasons Why</h2>
 
-            {% if user.is_authenticated %}
-                <!-- keep the include on a single line to avoid Django treating it as text -->
-                <p><a class="button" href="{% url 'appointments_list' %}">View appointments {% include 'home/icons/list-task.svg' %}</a></p>
 
-                <!-- keep the include on a single line to avoid Django treating it as text -->
-                <p><a class="button" href="/logout" class="top-menu" style="background: none; border: none;">Logout {% include 'home/icons/person-fill-dash.svg' %}</a></p>
-            {% endif %}
+                <p class="intro-text">
+                    This website is dedicated to your mental health journey in Indianapolis. We provide a platform for you
+                    to find mental health resources, track your appointments, and stay informed about your mental health
+                    journey.
+                </p>
 
-            {% if not user.is_authenticated %}
-            <!-- keep the include on a single line to avoid Django treating it as text -->
-            <p><a class="button" href="{% url 'login' %}">Login {% include 'home/icons/person-fill-check.svg' %}</a></p>
-            {% endif %}
 
-        </section>
+                <p class="intro-text">
+                    Follow one of the links below to get started on your mental health journey.
+                </p>
 
-    </main>
+
+                <div class="action-links">
+                    <!-- keep the include on a single line to avoid Django treating it as text -->
+                    <a class="btn btn-primary" href="{% url 'resources_map' %}">Find Mental Health Clinic {% include 'home/icons/geo-alt.svg' %}</a>
+
+
+                    {% if user.is_authenticated %}
+                        <!-- keep the include on a single line to avoid Django treating it as text -->
+                        <a class="btn btn-secondary" href="{% url 'appointments_list' %}">View appointments {% include 'home/icons/list-task.svg' %}</a>
+
+
+                        <!-- keep the include on a single line to avoid Django treating it as text -->
+                        <a class="btn btn-secondary" href="/logout">Logout {% include 'home/icons/person-fill-dash.svg' %}</a>
+                    {% else %}
+                        <!-- keep the include on a single line to avoid Django treating it as text -->
+                        <a class="btn btn-secondary" href="{% url 'login' %}">Login {% include 'home/icons/person-fill-check.svg' %}</a>
+                    {% endif %}
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+
     {% endblock %}
 </body>
+
 
 </html>

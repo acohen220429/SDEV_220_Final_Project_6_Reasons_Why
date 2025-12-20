@@ -1,46 +1,72 @@
 {% extends 'home/index.html' %}
 {% block content %}
 <main class="container appointments">
+
+
     {% if user.is_authenticated %}
-    <h1 style="margin-bottom:1.5rem;">Appointments</h1>
+
+
+    <h1>Appointments</h1>
+
+
     {% if reminders_12hours %}
-    <div style="background-color:#f8d7da; padding:12px; margin-bottom:15px; border-radius:6px;">
-        <strong> Appointments within the next 12 hours:</strong>
-        <ul>
+    <div class="alert alert-danger">
+        <strong>Appointments within the next 12 hours:</strong>
+        <ul class="reminder-list">
             {% for appointment in reminders_12hours %}
             <li>
-                {{ appointment.doctor }} -
-                {{ appointment.date }} at {{ appointment.time }}
+                {{ appointment.doctor }} — {{ appointment.date }} at {{ appointment.time }}
             </li>
             {% endfor %}
         </ul>
     </div>
     {% endif %}
+
+
     {% if reminders_24hours %}
-    <div style="background-color:#fff3cd; padding:12px; margin-bottom:15px; border-radius:6px;">
-        <strong> Appointments within the next 24 hours:</strong>
-        <ul>
+    <div class="alert alert-warning">
+        <strong>Appointments within the next 24 hours:</strong>
+        <ul class="reminder-list">
             {% for appointment in reminders_24hours %}
             <li>
-                {{ appointment.doctor }} -
-                {{ appointment.date }} at {{ appointment.time }}
+                {{ appointment.doctor }} — {{ appointment.date }} at {{ appointment.time }}
             </li>
             {% endfor %}
         </ul>
     </div>
     {% endif %}
-    <ul style="margin-bottom:1.5rem; padding-left:1.1rem;">
+
+
+    <!-- APPOINTMENT CARDS GRID -->
+    <ul class="appt-list">
         {% for appointment in appointments %}
-        <li style="margin-bottom:0.5rem;">
-            <a href="{% url 'appointment_detail' appointment.pk %}">{{ appointment|linebreaksbr }}</a>
+        <li class="appt-item">
+            <a class="appt-link" href="{% url 'appointment_detail' appointment.pk %}">
+
+                <div class="appt-field"><strong>Doctor:</strong> {{ appointment.doctor }}</div>
+                <div class="appt-field"><strong>Location:</strong> {{ appointment.clinic }}</div>
+                <div class="appt-field"><strong>Date:</strong> {{ appointment.date }}</div>
+                <div class="appt-field"><strong>Time:</strong> {{ appointment.time }}</div>
+                <div class="appt-field"><strong>Description:</strong> {{ appointment.description }}</div>
+
+            </a>
         </li>
         {% empty %}
-        <li style="margin-bottom:0.5rem;">No appointments scheduled.</li>
+        <li class="appt-item">No appointments scheduled.</li>
         {% endfor %}
     </ul>
-    <p class="action-links" style="margin-top:1rem; margin-bottom:0.4rem;"><a href="{% url 'appointment_create' %}">Add
-            a new appointment {% include 'home/icons/plus-circle.svg' %}</a></p>
-    <p class="action-links" style="margin-bottom:0.8rem;"><a href="/">Back to index</a></p>
+
+
+    <div class="action-links">
+        <a class="btn btn-primary" href="{% url 'appointment_create' %}">
+            Add a new appointment {% include 'home/icons/plus-circle.svg' %}
+        </a>
+        <a class="btn btn-secondary" href="/">Back to index</a>
+    </div>
+
+
     {% endif %}
+
+
 </main>
 {% endblock %}
